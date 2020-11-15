@@ -125,17 +125,19 @@ prompt_git() {
     fi
 
     setopt promptsubst
-    autoload -Uz vcs_info
 
-    zstyle ':vcs_info:*' enable git
-    zstyle ':vcs_info:*' get-revision true
-    zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr '✚'
-    zstyle ':vcs_info:*' unstagedstr '±'
-    zstyle ':vcs_info:*' formats ' %u%c'
-    zstyle ':vcs_info:*' actionformats ' %u%c'
-    vcs_info
-    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+    # autoload -Uz vcs_info
+    # zstyle ':vcs_info:*' enable git
+    # zstyle ':vcs_info:*' get-revision true
+    # zstyle ':vcs_info:*' check-for-changes true
+    # zstyle ':vcs_info:*' stagedstr '✚'
+    # zstyle ':vcs_info:*' unstagedstr '±'
+    # zstyle ':vcs_info:*' formats ' %u%c'
+    # zstyle ':vcs_info:*' actionformats ' %u%c'
+    # vcs_info
+    # echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+
+    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${mode}"
   fi
 }
 
