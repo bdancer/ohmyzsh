@@ -106,22 +106,23 @@ prompt_git() {
   }
   local ref dirty mode repo_path
 
-   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
+  if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
     repo_path=$(git rev-parse --git-dir 2>/dev/null)
-    dirty=$(parse_git_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      prompt_segment yellow black
-    else
+
+    # dirty=$(parse_git_dirty)
+    # if [[ -n $dirty ]]; then
+    #  prompt_segment yellow black
+    #else
       prompt_segment green $CURRENT_FG
-    fi
+    #fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
-      mode=" <B>"
+      mode=" ●"
     elif [[ -e "${repo_path}/MERGE_HEAD" ]]; then
-      mode=" >M<"
+      mode=" ✎"
     elif [[ -e "${repo_path}/rebase" || -e "${repo_path}/rebase-apply" || -e "${repo_path}/rebase-merge" || -e "${repo_path}/../.dotest" ]]; then
-      mode=" >R>"
+      mode=" ☲"
     fi
 
     setopt promptsubst
@@ -137,7 +138,7 @@ prompt_git() {
     # vcs_info
     # echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
 
-    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${mode}"
+    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR } ☢${mode}"
   fi
 }
 
